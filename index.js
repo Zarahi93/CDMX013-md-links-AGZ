@@ -5,8 +5,6 @@ const {resolve} = require('path');
 
 let route = 'archivo.txt';
 
-//let route = 'C:\Users\Zarakem\Documents\A_Laboratoria\Proyecto 4- Markdown Links\MarkdownLinks\CDMX013-md-links-AGZ\archivo.txt';
-
 let absolutePath = path.isAbsolute(route) // true is absolute
 
 if (absolutePath === false) { // Checks if the path is absolute
