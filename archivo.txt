@@ -1,2 +1,2 @@
 Hi!
-There is a file with text.
+There is a file with some text in it.
