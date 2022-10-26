@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const {resolve} = require('path');
 
-let route = 'archivo.txt';
+let route = './archivo.txt';
 
 let absolutePath = path.isAbsolute(route) // true is absolute
 
