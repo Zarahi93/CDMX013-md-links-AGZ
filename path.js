@@ -15,13 +15,13 @@ let route = 'archivo.txt';
 };
 
 function isThereAFile (){
-    if (fs.existsSync(route)) { // 
+    if (fs.existsSync(route)) { // Checks if the file exist
         console.log('The file is here! and it says:'.yellow);
         } else {
           console.log('Nothing here!'.magenta);
         }
 };
-function readTheFile (){
+function readTheFile (){ // Read the file
         fs.readFile(route, 'utf-8', (err, data) => {
           if(err) {
             console.log('But, why?:'.red, err);
@@ -32,5 +32,7 @@ function readTheFile (){
     };
 
 module.exports = {
-    isPathAbsolute, isThereAFile, readTheFile
+    isPathAbsolute,
+    isThereAFile, 
+    readTheFile
 }
