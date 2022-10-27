@@ -1,6 +1,8 @@
 const fn = require('./path');
+let route = './';
 
-fn.isPathAbsolute();
-fn.isThereAFile(); 
-fn.readTheFile();
-fn.extensionFile();
+fn.itIsADir(route);
+
+//fn.getTheFile(route);
+// fn.isThereAFile(); 
+// fn.extensionFile();
