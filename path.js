@@ -2,7 +2,7 @@ const colors = require('colors');
 const fs = require('fs');
 const path = require('path');
 const {resolve} = require('path');
-let route = 'archivo.txt';
+let route = './README.md';
 
  function isPathAbsolute ()  {
     let absolutePath = path.isAbsolute(route) // true is absolute
@@ -31,8 +31,17 @@ function readTheFile (){ // Read the file
         })
     };
 
+function extensionFile (){
+const extenFile = path.extname(route);
+if (extenFile !== '.md') {
+  console.log('This is NOT an md file!'.red);
+}
+console.log(extenFile);
+};
+
 module.exports = {
     isPathAbsolute,
     isThereAFile, 
-    readTheFile
+    readTheFile,
+    extensionFile
 }
