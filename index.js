@@ -1,10 +1,16 @@
 const fn = require('./path');
 const axios = require('axios');
-const colors = require('colors');
-let route = './';
+const api = require('./api');
 
-//console.log(fn.getPathAbsolute(route).green);
-// fn.itIsADir(route);
-// fn.getTheFile(route); 
-// fn.extensionFile(route);
-console.log(fn.getFolders('test'));
+// Absolute C:/Users/Zarakem/Documents/A_Laboratoria/Proyecto 4- Markdown Links/MarkdownLinks/CDMX013-md-links-AGZ
+// No absolute ./
+
+//console.log(fn.getPathAbsolute('C:/Users/Zarakem/Documents/A_Laboratoria/Proyecto 4- Markdown Links/MarkdownLinks/CDMX013-md-links-AGZ').green);
+//console.log(fn.itIsADir('./'));
+//console.log(fn.getFolders('./archivo.txt'));
+//console.log(fn.getTheFile('./READMEs.md')); 
+// console.log(fn.isAnMdFile('./README.md'));
+
+api.mdLinks(process.argv[2])
+.then(result => console.log(result))
+.catch(result => console.log(result));

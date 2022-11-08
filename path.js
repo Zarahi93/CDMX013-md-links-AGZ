@@ -5,7 +5,7 @@ const {resolve} = require('path');
 const axios = require('axios');
 const http = require('http');
 
- const getPathAbsolute = (route) => {
+ const getPathAbsolute = (route) => { // Checks if the path is absolute and if not makes it absolute
     let absolutePath = path.isAbsolute(route) // true is absolute
     if (absolutePath === false) { // Checks if the path is absolute
      route = path.resolve(route);
@@ -14,21 +14,20 @@ const http = require('http');
     return route;
 };
 
-const itIsADir=(route)=>{// Checks if the route is of a dir of a file
-  console.log(route);
-  fs.readdir(route, { withFileTypes: true }, (err, files) => {
-    if (err) {
-      console.error('What is wrong?:', err)
-      return
-    }
-    console.log('files: ')
-    files.forEach(file => {
-      // the `isDirectory` method returns true if the entry is a directory
-      const type = file.isDirectory() ? '📂' : '📄'
-      console.log(type, file.name)
-    })
-  })
-};
+// const itIsADir=(route)=>{// Checks if the route is of a dir of a file
+//   fs.readdir(route, { withFileTypes: true }, (err, files) => {
+//     if (err) {
+//       console.error('What is wrong?:', err);
+//     }
+//     console.log('Files: '.bgBlue);
+//     files.forEach(file => {
+//       // the `isDirectory` method returns true if the entry is a directory
+//       const type = file.isDirectory() ? '📂' : '📄';
+//       console.log(type, file.name);
+//     });
+//   });
+// };
+const itIsADir = (route) => fs.lstatSync(route).isDirectory();
 
 const getFolders = (route, resultFiles = [])=>{// Reads a directory recursively  
  const files = fs.readdirSync(route);
@@ -37,32 +36,27 @@ const getFolders = (route, resultFiles = [])=>{// Reads a directory recursively
   if(fs.lstatSync(newRoute).isDirectory()){
     getFolders(newRoute, resultFiles);
   } resultFiles.push(newRoute);
- })
+ });
  return resultFiles;
-}
+};
 
-const getTheFile = (route)=>{
+const getTheFile = (route)=>{// Checks if the file exist and if it does, read it.
     if (fs.existsSync(route)) { // Checks if the file exist
-      fs.readFile(route, 'utf-8', (err, data) => {// Read the file
-        if(err) {
-          console.log('But, why?:'.red, err);
+      return fs.readFileSync(route, 'utf-8');
         } else {
-          console.log(data.blue);
-        }
-      })
-        } else {
-          console.log('Nothing here!'.magenta);
-        }
+          return ('This file does not exist!'.bgMagenta);
+        };
 };
 
-const isAnMdFile = (route)=>{
-const extenFile = path.extname(route);
-if (extenFile !== '.md') {
-  console.log('This is NOT an md file!'.red);
-}
-console.log(extenFile);
-};
-
+const isAnMdFile = (file) => path.extname(file);
+//{
+// const extenFile = path.extname(file);
+// if (extenFile !== '.md') {
+//   console.log('This is NOT an md file!'.red);
+// } 
+// console.log(file);
+// return file;
+//};
 
 module.exports = {
     getPathAbsolute,
