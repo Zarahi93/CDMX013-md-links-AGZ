@@ -1,5 +1,4 @@
 const fn = require('./path');
-const axios = require('axios');
 const api = require('./api');
 
 // Absolute C:/Users/Zarakem/Documents/A_Laboratoria/Proyecto 4- Markdown Links/MarkdownLinks/CDMX013-md-links-AGZ
