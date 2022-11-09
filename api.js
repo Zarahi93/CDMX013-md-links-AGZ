@@ -37,14 +37,15 @@ if (resultLinks !== null || resultLinks !== 0){
         });
     });
 }
+
 //resolve (ArrayOfLinks);
 // Validate links 
-if (options.validate === true) {
-    let promArray = [];
-    ArrayOfLinks.forEach((links)=>{
-        let validationOfLinks = fn.validateLinks(links.href)
-    })
-}
+// if (options.validate === true) {
+//     let promArray = [];
+//     ArrayOfLinks.forEach((links)=>{
+//         let validationOfLinks = fn.validateLinks(links.href)
+//     })
+// }
 });
 
 
@@ -52,6 +53,6 @@ resolve(ArrayOfLinks);
 reject('There are no links in this file'.bgRed);
     });
 
-module.exports = { 
-mdLinks
-};
+    module.exports = { 
+        mdLinks
+        };
