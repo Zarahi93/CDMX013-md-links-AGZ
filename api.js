@@ -32,7 +32,7 @@ if (resultLinks !== null || resultLinks !== 0){
     resultLinks.forEach(url =>{
         ArrayOfLinks.push({
             href: url[2],
-            text: url[2].slice(0,50),
+            text: url[1],
             file: file
         });
     });
