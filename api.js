@@ -21,7 +21,7 @@ const mdFiles = allFiles.filter(file => {
 
 const ArrayOfLinks = [];
 
-mdFiles.forEach((file)=>{
+mdFiles.forEach((file)=>{ //Creates a new array with the links that are inside the file
     
     // Reads the file
     const filteredFiles = fn.getTheFile(file);
@@ -38,6 +38,13 @@ if (resultLinks !== null || resultLinks !== 0){
     });
 }
 //resolve (ArrayOfLinks);
+// Validate links 
+if (options.validate === true) {
+    let promArray = [];
+    ArrayOfLinks.forEach((links)=>{
+        let validationOfLinks = fn.validateLinks(links.href)
+    })
+}
 });
 
 

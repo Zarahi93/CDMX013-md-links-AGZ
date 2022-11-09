@@ -10,6 +10,7 @@ const api = require('./api');
 //console.log(fn.getFolders('./archivo.txt'));
 //console.log(fn.getTheFile('./READMEs.md')); 
 // console.log(fn.isAnMdFile('./README.md'));
+//console.log(fn.validateLinks('https://docs.npmjs.com/getting-started/what-is-npm'));
 
 api.mdLinks(process.argv[2])
 .then(result => console.log(result))

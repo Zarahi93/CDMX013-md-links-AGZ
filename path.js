@@ -2,8 +2,9 @@ const colors = require('colors');
 const fs = require('fs');
 const path = require('path');
 const {resolve} = require('path');
-const axios = require('axios');
 const http = require('http');
+const { url } = require('inspector');
+const URL = require('url').URL;
 
  const getPathAbsolute = (route) => { // Checks if the path is absolute and if not makes it absolute
     let absolutePath = path.isAbsolute(route) // true is absolute
@@ -48,7 +49,7 @@ const getTheFile = (route)=>{// Checks if the file exist and if it does, read it
         };
 };
 
-const isAnMdFile = (file) => path.extname(file);
+const isAnMdFile = (file) => path.extname(file); // Check if the file is an md file
 //{
 // const extenFile = path.extname(file);
 // if (extenFile !== '.md') {
@@ -57,6 +58,15 @@ const isAnMdFile = (file) => path.extname(file);
 // console.log(file);
 // return file;
 //};
+const validateLinks = (href) => {
+  try {
+    new URL(href)
+    return true
+  } catch {
+    return false
+  }
+};
+//const validateLinks = (href) => axios.get(href);
 
 module.exports = {
     getPathAbsolute,
@@ -64,4 +74,5 @@ module.exports = {
     getFolders,
     getTheFile, 
     isAnMdFile,
+    validateLinks
 };
