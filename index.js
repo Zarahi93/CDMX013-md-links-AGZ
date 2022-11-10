@@ -12,5 +12,5 @@ const api = require('./api');
 //console.log(fn.validateLinks('https://docs.npmjs.com/getting-started/what-is-npm'));
 
 api.mdLinks(process.argv[2])
-.then(result => console.log(result))
-.catch(result => console.log(result));
+.then(result => console.log('ya'))
+.catch(result => console.log('no'));

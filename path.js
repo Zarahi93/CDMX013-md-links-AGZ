@@ -58,21 +58,12 @@ const isAnMdFile = (file) => path.extname(file); // Check if the file is an md f
 // console.log(file);
 // return file;
 //};
-const validateLinks = (href) => {
-  try {
-    new URL(href)
-    return true
-  } catch {
-    return false
-  }
-};
-//const validateLinks = (href) => axios.get(href);
+
 
 module.exports = {
     getPathAbsolute,
     itIsADir,
     getFolders,
     getTheFile, 
-    isAnMdFile,
-    validateLinks
+    isAnMdFile
 };

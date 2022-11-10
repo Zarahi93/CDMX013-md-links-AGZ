@@ -1,4 +1,5 @@
 const fn = require('./path');
+const {validateLink} = require('./validateLink') 
 
 const mdLinks = (route, options) => 
     new Promise ((resolve, reject)=>{
@@ -16,7 +17,7 @@ const mdFiles = allFiles.filter(file => {
   if(fn.isAnMdFile(file) == '.md'){
     return file;
   } 
-  console.log('There is no md file'.red);
+  //console.log('There is no md file'.red);
 });
 
 const ArrayOfLinks = [];
@@ -37,15 +38,19 @@ if (resultLinks !== null || resultLinks !== 0){
         });
     });
 }
-
-//resolve (ArrayOfLinks);
+let linksValids=ArrayOfLinks.map(objeto=>{
+    
+    return validateLink(objeto.href).then(codigo=>
+        objeto.respuesta=codigo
+        ).catch(err=>
+            objeto.respuesta=err
+            )
+           
+            
+})
+Promise.all(linksValids).then(alok=>console.log(alok))
 // Validate links 
-// if (options.validate === true) {
-//     let promArray = [];
-//     ArrayOfLinks.forEach((links)=>{
-//         let validationOfLinks = fn.validateLinks(links.href)
-//     })
-// }
+
 });
 
 
