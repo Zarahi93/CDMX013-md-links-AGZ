@@ -1,22 +1,36 @@
 const axios = require('axios');
 
 
-const validateLink = (href) => {
+const validateLink = (object) => {
     return new Promise((resolve, reject) => {
-        axios.get(href)
+        axios.get(object.href)
             .then(function (response) {
                 // handle success 
-                resolve(response.status)
+                resolve({
+                   //href: object.href,
+                   //text: object.text,
+                   //file: object.file,
+                   ...object,
+                   status: response.status,
+                   msg: response.statusText
+                })
             })
             .catch(function (error) {
                 // handle error
-                reject('404')
+                //console.log(error.response.status);
+                const status = error.response ? error.response.status : 404
+                reject({
+                   ...object,  
+                   status,
+                   msg: 'Fail'
+                })
             })
     })
 }
 
+
 module.exports={
-    validateLink
+    validateLink,
 }
 
 /*

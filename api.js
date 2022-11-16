@@ -20,42 +20,42 @@ const mdFiles = allFiles.filter(file => {
   //console.log('There is no md file'.red);
 });
 
-const ArrayOfLinks = [];
+const arrayOfLinks = [];
 
 mdFiles.forEach((file)=>{ //Creates a new array with the links that are inside the file
     
     // Reads the file
-    const filteredFiles = fn.getTheFile(file);
+const filteredFiles = fn.getTheFile(file);
     // Get the links
 const findLinks = /\[(.+)\]\((https?:\/\/.+)\)/gi;
 const resultLinks = [...filteredFiles.matchAll(findLinks)];
 if (resultLinks !== null || resultLinks !== 0){
     resultLinks.forEach(url =>{
-        ArrayOfLinks.push({
+        arrayOfLinks.push({
             href: url[2],
             text: url[1],
             file: file
         });
     });
+} else if(resultLinks === null || resultLinks === 0) {
+    console.log('The are no links');
 }
-let linksValids=ArrayOfLinks.map(objeto=>{
-    
-    return validateLink(objeto.href).then(codigo=>
-        objeto.respuesta=codigo
-        ).catch(err=>
-            objeto.respuesta=err
-            )
-           
-            
-})
-Promise.all(linksValids).then(alok=>console.log(alok))
-// Validate links 
-
 });
 
+let linksValids=arrayOfLinks.map(object=>{
+   return validateLink(object).then(code=>
+        object.response=code
+        ).catch(err=>
+            object.response=err
+            )
+             
+})
+const getCode = Promise.all(linksValids).then(gotCode=>gotCode);
 
-resolve(ArrayOfLinks);
-reject('There are no links in this file'.bgRed);
+
+
+resolve(getCode);
+reject('Error'.bgRed);
     });
 
     module.exports = { 
