@@ -1,6 +1,5 @@
 const axios = require('axios');
 
-
 const validateLink = (object) => {
     return new Promise((resolve, reject) => {
         axios.get(object.href)
@@ -12,17 +11,17 @@ const validateLink = (object) => {
                    //file: object.file,
                    ...object,
                    status: response.status,
-                   msg: response.statusText
+                   msg: 'This link works'
                 })
             })
             .catch(function (error) {
                 // handle error
                 //console.log(error.response.status);
-                const status = error.response ? error.response.status : 404
+                const status = error.response ? error.response.status : 404;
                 reject({
                    ...object,  
                    status,
-                   msg: 'Fail'
+                   msg: 'This link is not working'
                 })
             })
     })
@@ -32,9 +31,3 @@ const validateLink = (object) => {
 module.exports={
     validateLink,
 }
-
-/*
-validateLink('https://googlejajaja.com')
-.then(unarespuesta=>console.log(unarespuesta))
-.catch(err=>console.log(err))
-*/

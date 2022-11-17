@@ -1,7 +1,7 @@
 const fn = require('./path');
 const {validateLink} = require('./validateLink') 
 
-const mdLinks = (route, options) => 
+const mdLinks = (route) => 
     new Promise ((resolve, reject)=>{
 // Check if the path is absolute and if not make it absolute
  const getPathAbsolute = fn.getPathAbsolute(route);
@@ -13,7 +13,7 @@ if (fn.itIsADir(getPathAbsolute)){
 } allFiles.push(getPathAbsolute);
 
 // Get .md files
-const mdFiles = allFiles.filter(file => {
+const mdFiles = allFiles.filter(file => { // Callback?
   if(fn.isAnMdFile(file) == '.md'){
     return file;
   } 
@@ -27,8 +27,8 @@ mdFiles.forEach((file)=>{ //Creates a new array with the links that are inside t
     // Reads the file
 const filteredFiles = fn.getTheFile(file);
     // Get the links
-const findLinks = /\[(.+)\]\((https?:\/\/.+)\)/gi;
-const resultLinks = [...filteredFiles.matchAll(findLinks)];
+const findLinks = /\[(.+)\]\((https?:\/\/.+)\)/gi;// Filtrado por medio de expresiones regulares, g:busqueda global, i: no diferencia entre mayusculas y minusculas
+const resultLinks = [...filteredFiles.matchAll(findLinks)]; //Para iterar todos los resultados de insidencia entre un string y una expresion regular.
 if (resultLinks !== null || resultLinks !== 0){
     resultLinks.forEach(url =>{
         arrayOfLinks.push({
@@ -37,12 +37,14 @@ if (resultLinks !== null || resultLinks !== 0){
             file: file
         });
     });
-} else if(resultLinks === null || resultLinks === 0) {
-    console.log('The are no links');
-}
+} 
 });
 
-let linksValids=arrayOfLinks.map(object=>{
+if (arrayOfLinks === null || arrayOfLinks.length === 0) {
+    console.log('The are no links in this file');
+}
+
+let linksValids=arrayOfLinks.map(object=>{//Array de promesas
    return validateLink(object).then(code=>
         object.response=code
         ).catch(err=>
@@ -50,13 +52,12 @@ let linksValids=arrayOfLinks.map(object=>{
             )
              
 })
-const getCode = Promise.all(linksValids).then(gotCode=>gotCode);
 
+const getArrayCode = Promise.all(linksValids).then(gotArrayCode=>gotArrayCode); // Devuelve una promesa que termina correctamente cuando todas las promesas en el argumento iterable han sido concluídas 
 
-
-resolve(getCode);
-reject('Error'.bgRed);
-    });
+resolve(getArrayCode);
+reject('Error');
+});
 
     module.exports = { 
         mdLinks

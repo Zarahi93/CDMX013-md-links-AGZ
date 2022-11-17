@@ -1,4 +1,3 @@
-const colors = require('colors');
 const fs = require('fs');
 const path = require('path');
 const {resolve} = require('path');
@@ -45,7 +44,7 @@ const getTheFile = (route)=>{// Checks if the file exist and if it does, read it
     if (fs.existsSync(route)) { // Checks if the file exist
       return fs.readFileSync(route, 'utf-8');
         } else {
-          return ('This file does not exist!'.bgMagenta);
+          return ('This file does not exist!');
         };
 };
 
