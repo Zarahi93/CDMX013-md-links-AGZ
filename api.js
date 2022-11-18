@@ -1,5 +1,5 @@
 const fn = require('./path');
-const {validateLink} = require('./validateLink') 
+const {validateLink} = require('./validateLink'); 
 
 const mdLinks = (route) => 
     new Promise ((resolve, reject)=>{
@@ -13,7 +13,7 @@ if (fn.itIsADir(getPathAbsolute)){
 } allFiles.push(getPathAbsolute);/**A**/
 
 // Get .md files
-const mdFiles = allFiles.filter(file => { // Callback? /**A**/
+const mdFiles = allFiles.filter(file => { // Callback /**A**/
   if(fn.isAnMdFile(file) == '.md'){
     return file;
   } 
@@ -45,8 +45,8 @@ if (arrayOfLinks === null || arrayOfLinks.length === 0) {// Condicional if
 }
 
 let linksValids=arrayOfLinks.map(object=>{//Array de promesas
-   return validateLink(object).then(code=>
-        object.response=code
+   return validateLink(object).then(statusCode=>
+        object.response=statusCode
         ).catch(err=>
             object.response=err
             )

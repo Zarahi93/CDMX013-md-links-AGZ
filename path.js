@@ -34,7 +34,7 @@ const getFolders = (route, resultFiles = [])=>{// Reads a directory recursively
  files.forEach((file)=>{/**A**/
   const newRoute = path.join(route, file);/**A**/
   if(fs.lstatSync(newRoute).isDirectory()){
-    getFolders(newRoute, resultFiles);
+    getFolders(newRoute, resultFiles);/**Recur**/
   } resultFiles.push(newRoute);/**A**/
  });
  return resultFiles;
