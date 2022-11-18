@@ -10,10 +10,10 @@ const mdLinks = (route) =>
 // Reads folders
 if (fn.itIsADir(getPathAbsolute)){
     allFiles = [...allFiles,...fn.getFolders(getPathAbsolute)];
-} allFiles.push(getPathAbsolute);
+} allFiles.push(getPathAbsolute);/**A**/
 
 // Get .md files
-const mdFiles = allFiles.filter(file => { // Callback?
+const mdFiles = allFiles.filter(file => { // Callback? /**A**/
   if(fn.isAnMdFile(file) == '.md'){
     return file;
   } 
@@ -22,7 +22,7 @@ const mdFiles = allFiles.filter(file => { // Callback?
 
 const arrayOfLinks = [];
 
-mdFiles.forEach((file)=>{ //Creates a new array with the links that are inside the file
+mdFiles.forEach((file)=>{ //Creates a new array with the links that are inside the file /**A**/
     
     // Reads the file
 const filteredFiles = fn.getTheFile(file);
@@ -32,7 +32,7 @@ const resultLinks = [...filteredFiles.matchAll(findLinks)]; //Para iterar todos 
 if (resultLinks !== null || resultLinks !== 0){
     resultLinks.forEach(url =>{
         arrayOfLinks.push({
-            href: url[2],
+            href: url[2], // { key : value }
             text: url[1],
             file: file
         });
@@ -40,7 +40,7 @@ if (resultLinks !== null || resultLinks !== 0){
 } 
 });
 
-if (arrayOfLinks === null || arrayOfLinks.length === 0) {
+if (arrayOfLinks === null || arrayOfLinks.length === 0) {// Condicional if
     console.log('The are no links in this file');
 }
 

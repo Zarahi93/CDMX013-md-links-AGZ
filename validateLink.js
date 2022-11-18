@@ -11,17 +11,17 @@ const validateLink = (object) => {
                    //file: object.file,
                    ...object,
                    status: response.status,
-                   msg: 'This link works'
+                   message: 'This link works'
                 })
             })
             .catch(function (error) {
                 // handle error
                 //console.log(error.response.status);
-                const status = error.response ? error.response.status : 404;
+                const status = error.response ? error.response.status : 404; /**Operador ternario**/
                 reject({
                    ...object,  
                    status,
-                   msg: 'This link is not working'
+                   message: 'This link is not working'
                 })
             })
     })

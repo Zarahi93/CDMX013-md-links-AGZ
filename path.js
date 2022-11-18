@@ -31,11 +31,11 @@ const itIsADir = (route) => fs.lstatSync(route).isDirectory();
 
 const getFolders = (route, resultFiles = [])=>{// Reads a directory recursively  
  const files = fs.readdirSync(route);
- files.forEach((file)=>{
-  const newRoute = path.join(route, file);// 
+ files.forEach((file)=>{/**A**/
+  const newRoute = path.join(route, file);/**A**/
   if(fs.lstatSync(newRoute).isDirectory()){
     getFolders(newRoute, resultFiles);
-  } resultFiles.push(newRoute);
+  } resultFiles.push(newRoute);/**A**/
  });
  return resultFiles;
 };
